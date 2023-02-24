@@ -1,9 +1,10 @@
 from flask import Flask,request
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters,CallbackContext,CallbackQueryHandler, Dispatcher
 from telegram import Update,  Bot
+import os
+
 from handler import start, get_image, callback_like
 
-import os
 
 # get token from environment variable
 TOKEN = os.environ['TOKEN'] 
@@ -23,7 +24,6 @@ def main():
     #update
     update: Update = Update.de_json(data, bot)
     
-    print(request.form)
     dp.add_handler(CommandHandler('start', start))
     dp.add_handler(MessageHandler(Filters.photo, get_image))
     dp.add_handler(CallbackQueryHandler(callback_like))
@@ -31,6 +31,6 @@ def main():
     dp.process_update(update)
     return {"status":200}
 
-if __name__ == '__main__':
-    app.run(debug=True)
+# if __name__ == '__main__':
+#     app.run(debug=True)
     

@@ -47,7 +47,7 @@ def get_image(update:Update, context:CallbackContext):
     context.bot.send_photo(
         chat_id=channel_id, 
         photo=image_id,
-        caption="Like this image to get 10 likes back",
+        caption="Rasmga reaksiya bildirishni unitmang!!!",
         reply_markup=keyboard
         )
     
@@ -64,7 +64,7 @@ def callback_like(update:Update, context:CallbackContext):
 
     
     query.answer(
-        f'User id: {user_id}, Message id: {message_id} Data: {like}', 
+        f' Data: {like}', 
         show_alert=True
         )
     # query.edit_message_text(text="Selected option: {}".format(query.data))
