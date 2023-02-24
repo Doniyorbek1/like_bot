@@ -42,7 +42,7 @@ def get_image(update:Update, context:CallbackContext):
 
 
     
-    channel_id = '@image_like'
+    channel_id = '@sinov_uchun11'
     # Send image to channel
     context.bot.send_photo(
         chat_id=channel_id, 
