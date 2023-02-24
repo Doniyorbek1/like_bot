@@ -34,3 +34,4 @@ def main():
 if __name__ == '__main__':
     app.run(debug=True)
     
+# print(bot.get_webhook_info("https://likedislike.pythonanywhere.com/"))
