@@ -12,7 +12,7 @@ bot = Bot(TOKEN)
 
 app = Flask(__name__)
 
-@app.route('/', methods=['POST'])
+@app.route('/home', methods=['POST'])
 def main():
     
     data = request.get_json(force=True)
@@ -29,9 +29,8 @@ def main():
     dp.add_handler(CallbackQueryHandler(callback_like))
     
     dp.process_update(update)
-    return 'OK'
+    return {"status":200}
 
-if __name__ == '__main__':
-    app.run(debug=True)
+# if __name__ == '__main__':
+#     app.run(debug=True)
     
-# print(bot.get_webhook_info("https://likedislike.pythonanywhere.com/"))
