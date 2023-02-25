@@ -32,10 +32,12 @@ def get_image(update:Update, context:CallbackContext):
     response = requests.post(url, json=payload)
     # Print status code
     print(response.status_code)
+    url2 = 'http://likedislikeapi.pythonanywhere.com/api/all-like-dislike'
+    rep = requests.post(url2, image_id)
     keyboard = InlineKeyboardMarkup([
         [
-        InlineKeyboardButton("Like 👍", callback_data=f'like:{message_id}'),
-        InlineKeyboardButton("Dislike 👎", callback_data=f'dislike:{message_id}')
+        InlineKeyboardButton(f"Like 👍{rep[0]}", callback_data=f'like:{message_id}'),
+        InlineKeyboardButton("Dislike 👎{rep[1]}", callback_data=f'dislike:{message_id}')
         
         ]
     ])
