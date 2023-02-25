@@ -64,7 +64,7 @@ def callback_like(update:Update, context:CallbackContext):
 
     
     query.answer(
-        f' Data: {like}', 
+        f' Data: {like}, "image_id":{message_id}', 
         show_alert=True
         )
     # query.edit_message_text(text="Selected option: {}".format(query.data))
