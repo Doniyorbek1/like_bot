@@ -3,6 +3,7 @@ from telegram.ext import Updater, CommandHandler, MessageHandler, Filters,Callba
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 import logging
 import requests
+from pprint import pprint
 # Handler for /start command
 def start(update:Update, context:CallbackContext):
 
@@ -32,10 +33,14 @@ def get_image(update:Update, context:CallbackContext):
     response = requests.post(url, json=payload)
     # Print status code
     print(response.status_code)
+    # data = requests.get('http://likedislikeapi.pythonanywhere.com/api/{message_id}')
+    # data = data.json()
+    # likes = data["like"]
+    # dislikes = data["dislike"]
     keyboard = InlineKeyboardMarkup([
         [
-        InlineKeyboardButton(f"Like 👍", callback_data=f'like:{message_id}'),
-        InlineKeyboardButton(f"Dislike 👎", callback_data=f'dislike:{message_id}')
+        InlineKeyboardButton(f"👍", callback_data=f'like:{message_id}'),
+        InlineKeyboardButton(f"👎", callback_data=f'dislike:{message_id}')
         
         ]
     ])
@@ -55,11 +60,26 @@ def get_image(update:Update, context:CallbackContext):
 def callback_like(update:Update, context:CallbackContext):
     query = update.callback_query
     # Get query data
+    pprint(query.data)
     like,message_id = query.data.split(':')
     #  Get user id
     user_id = query.from_user.id
     # Get message id
-    
+    print(like)
+    if like == 'like':
+        url = "http://likedislikeapi.pythonanywhere.com/add-like"
+        payload = {
+            "user_id ":user_id,
+            "img_id":message_id,
+        }
+        r = requests.post(url, json=payload)     
+    else:
+        url = "http://likedislikeapi.pythonanywhere.com/add-dislike"
+        payload = {
+            "user_id ":user_id,
+            "img_id":message_id,
+        }
+        r = requests.post(url, json=payload)  
 
 
     
@@ -68,5 +88,5 @@ def callback_like(update:Update, context:CallbackContext):
         show_alert=True
         )
     # query.edit_message_text(text="Selected option: {}".format(query.data))
-
     
+    return {"status":200}
